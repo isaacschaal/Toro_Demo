@@ -1,0 +1,22 @@
+
+# Don't track local files
+*.DS_Store
+__pycache__
+
+
+# Don't track env, dbs, package-lock
+.env
+*.sqlite
+*-lock.json
+
+# Don't track smart contract files
+smart_contract/build/
+smart_contract/flattened*
+smart_contract/node_modules/
+smart_contract/metadata_hosting
+
+# Don't track pkls or imgs
+*.pkl
+*.pt
+*.jpg
+*.png

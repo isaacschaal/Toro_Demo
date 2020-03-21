@@ -1,0 +1,27 @@
+{
+  "name": "AA_smart_contract_rinkeby",
+  "version": "1.0.0",
+  "description": "Rinkeby test network version of AA smart contract ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "isaac.h.schaal@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@0x/subproviders": "^2.1.4",
+    "argparse": "^1.0.10",
+    "opensea-js": "latest",
+    "openzeppelin-solidity": "^2.1.3",
+    "truffle": "^5.1.14",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "web3": "1.0.0-beta.34"
+  },
+  "engines": {
+    "node": "8.11.x",
+    "npm": "5.6.x"
+  },
+  "devDependencies": {
+    "truffle-flattener": "^1.4.2"
+  }
+}
