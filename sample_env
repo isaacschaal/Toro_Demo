@@ -1,0 +1,33 @@
+# The following environment variables are needed for this repo to work
+
+#### Twitter ####
+
+# Get these values from your Twitter App
+export TWITTER_APP_KEY=''
+export TWITTER_APP_KEY_SECRET=''
+export TWITTER_ACCESS_TOKEN=''
+export TWITTER_ACCESS_TOKEN_SECRET=''
+
+# The username of your twitter account
+export SCREEN_NAME=''
+
+#### Ethereum ####
+
+# Your infura key
+export INFURA_KEY=""
+
+# The mnemonic for your wallet (remember, keep this from appearing online)
+export MNEMONIC=""
+
+# The address of your wallet
+export OWNER_ADDRESS=""
+
+# The address of your contract (you must fill this in after you deploy
+# your contract)
+export NFT_CONTRACT_ADDRESS=""
+
+# The address that you will make payments too
+export DESTINATION_ADDRESS=""
+
+# The network you will run on
+export NETWORK="rinkeby"

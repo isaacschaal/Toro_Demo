@@ -1,3 +1,11 @@
+# This function tweets the newly generated images
+
+# It is called by the main_generate.py function
+
+# It recieves the week as input, and uses that to correctly
+# query the DB and access the correct images
+
+# Imports
 import os
 import time
 import argparse
@@ -14,7 +22,7 @@ TWITTER_APP_KEY_SECRET = os.getenv('TWITTER_APP_KEY_SECRET')
 TWITTER_ACCESS_TOKEN = os.getenv('TWITTER_ACCESS_TOKEN')
 TWITTER_ACCESS_TOKEN_SECRET = os.getenv('TWITTER_ACCESS_TOKEN_SECRET')
 
-# Connect to twitter
+# Create a Twython instance
 t = Twython(app_key=TWITTER_APP_KEY,
             app_secret=TWITTER_APP_KEY_SECRET,
             oauth_token=TWITTER_ACCESS_TOKEN,
@@ -23,16 +31,20 @@ t = Twython(app_key=TWITTER_APP_KEY,
 def tweet_text(piece_name):
     # Return the text for the tweet
     #return "%s. Original artwork created by Toro, and Autonomous AI Artist" % piece_name
-    return "%s. Testing - FFHQ" % piece_name
+    return "%s. Demo - FFHQ" % piece_name
 
+# Tweet the image, trying several times if the
+# tweet doesn't initially work, waiting between each try
 def tweet_img(piece_name,img_path):
     i = 0
     done = False
     id_str = "None"
     while not done and i<5:
         try:
+            # First upload the image
             with open(img_path, 'rb') as photo:
                 response = t.upload_media(media=photo)
+            # Then tweet with the media_id
             status = t.update_status(status=tweet_text(piece_name), media_ids=[response['media_id']])
             id_str = status['id_str']
             done = True
@@ -40,14 +52,14 @@ def tweet_img(piece_name,img_path):
             print(i, e)
             time.sleep(10)
             i+=1
+    # Return  the twitter_id
     return done, id_str
 
 def main(week):
-    # get the paths and ids from the DB
+    # Get the paths and ids from the DB
     img_path_list = []
     ids_list = []
     name_list = []
-
     session = Session()
     for id,path,name in session.query(Artwork.id, Artwork.path, Artwork.name).filter_by(week = week):
         ids_list.append(id)
@@ -55,26 +67,28 @@ def main(week):
         name_list.append(name)
     session.close()
 
-    # assert the length here? TODO
+    # Log failures (used for debugging)
     failed_list = []
 
+    # Tweet the images
     for i in range(len(img_path_list)):
-        # get the status and the twitter_id_str
+        # Get the status and the twitter_id_str
         result, twt_id_str = tweet_img(name_list[i], img_path_list[i])
 
-        # if it fails 5 times, deal with it TODO
+        # If it fails 5 times, record it
         if not result:
             print ("fail")
             failed_list.append(i)
-        # if it was succesfull
+
+        # If it was succesfull
         else:
-            # update the db with the twitter id
+            # Update the db with the twitter id
             session = Session()
             u = session.query(Artwork).get(ids_list[i])
             u.twitter_id_str = twt_id_str
             session.commit()
             session.close()
-        # wait 10 seconds for the next tweet
+        # Wait 10 seconds for the next tweet
         time.sleep(10)
 
 if __name__ == '__main__':

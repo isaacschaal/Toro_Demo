@@ -1,8 +1,9 @@
-
 # Don't track local files
 *.DS_Store
 __pycache__
 
+# Temp
+venv
 
 # Don't track env, dbs, package-lock
 .env

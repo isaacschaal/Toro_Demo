@@ -53,9 +53,12 @@ contract TradeableERC721Token is ERC721Full, Ownable {
   }
 
   /**
-    * Used to get token ID into JS
+    * This function has been added, and is the only
+    * modification from the original OpenSea version
     *
-    * returns a uint256 of the current token ID
+    *@dev Used to get token ID into JS
+    *
+    *@return a uint256 of the current token ID
     */
   function returnTokenID() public view returns (uint256){
     return _currentTokenId;

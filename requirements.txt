@@ -11,3 +11,4 @@ torch==1.4.0
 torchvision==0.5.0
 twython==3.7.0
 schedule==0.6.0
+supervisor==4.1.0

@@ -1,3 +1,12 @@
+# This function mints a new token, by both calling the smart contract
+# and uploading the metadata
+
+# It is called by the main_mint.py function
+
+# It recieves the week as input, and uses that to correctly
+# query the DB
+
+# Imports 
 import time
 import argparse
 from PIL import Image
@@ -11,25 +20,26 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--week", type=str, help="The number of the week")
 
 def main(week):
-    # get the winner
+    # Get the winner from the DB
     session = Session()
     db_id, name, path  = session.query(Artwork.id, Artwork.name, Artwork.path).filter_by(week = week, winner = True).first()
     session.close()
 
-    # save the image to the repo
+    # Save the image to the repo
     with Image.open(path) as img:
         img = img.save("metadata_hosting/image_hosting/"+name+".jpg")
 
-    # encode the name as url
+    # Encode the name as a url
     name_urld = name.replace(" ", "%20")
 
-    # make the image link
+    # Make the image link
     img_link = "https://raw.githubusercontent.com/isaacschaal/metadata_hosting/master/image_hosting/"+name_urld + ".jpg"
 
-    # make the metadata_dic
+    # Make the metadata dictionary
+    # This conforms to the OpenSea metadata standards
     metadata = {
       #"description": "One of a kind original artwork made by Toro, an Autonomous AI artist.",
-      "description": "Test Artwork.",
+      "description": "Demo Artwork.",
       "image": img_link,
       "name": str(name),
       "attributes": [
@@ -44,31 +54,29 @@ def main(week):
       ]
     }
 
-    # mint the token
-    commands = ['node', 'AA_smart_contract_rinkeby/scripts/mint.js']
+    # Mint the token using the mint.js script
+    commands = ['node', 'Toro_smart_contract/scripts/mint.js']
     process = subprocess.run(commands,
                             stdout=subprocess.PIPE,
                             universal_newlines=True)
-    # CHECK THAT IT WAS SUCCESFUL!
-    # IF IT WAS
 
     # Get the token_id from stdout
     stdout = process.stdout
     token_id = int(stdout.split("Token ID:",1)[1].strip())
 
-    # add token_id to DB
+    # Add token_id to DB
     session = Session()
     u = session.query(Artwork).get(db_id)
     u.tokenID = token_id
     session.commit()
     session.close()
 
-    # save the metadata to the repo
+    # Save the metadata to the repo
     f = open("./metadata_hosting/"+str(token_id),"w")
     f.write( json.dumps(metadata) )
     f.close()
 
-    # commit the changes and push them
+    # Commit the changes and push them
     git = sh.git.bake(_cwd='./metadata_hosting/')
     print(git.add('-A'))
     print(git.commit(m='added new images and metadata'))

@@ -1,13 +1,17 @@
 {
-  "name": "AA_smart_contract_rinkeby",
+  "name": "Toro_smart_contract",
   "version": "1.0.0",
   "description": "Rinkeby test network version of AA smart contract ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository":{
+    "type": "git",
+    "url": "https://github.com/isaacschaal/Toro_Demo"
+  },
   "author": "isaac.h.schaal@gmail.com",
-  "license": "ISC",
+  "license": "GPL",
   "dependencies": {
     "@0x/subproviders": "^2.1.4",
     "argparse": "^1.0.10",

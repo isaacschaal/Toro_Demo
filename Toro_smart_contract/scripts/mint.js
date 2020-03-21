@@ -1,3 +1,12 @@
+// This script mints a new token
+// It is called by the main_mint.py function
+
+// It mints a token with ID which is 1 greater
+// than the previously minted token, so requires no
+// arguments. The token metadata is linked to the id
+// and is uploaded in a seperate function in the main_mint.py script
+
+// Access our environement variables
 const HDWalletProvider = require("truffle-hdwallet-provider")
 const web3 = require('web3')
 const MNEMONIC = process.env.MNEMONIC
@@ -6,13 +15,15 @@ const NFT_CONTRACT_ADDRESS = process.env.NFT_CONTRACT_ADDRESS
 const OWNER_ADDRESS = process.env.OWNER_ADDRESS
 const NETWORK = process.env.NETWORK
 
+// Ensure that we have all environment variables
 if (!MNEMONIC || !INFURA_KEY || !OWNER_ADDRESS || !NETWORK || !NFT_CONTRACT_ADDRESS) {
     console.error("Please set a mnemonic, infura key, owner, network, and contract address.")
     return
 }
 
+// Define our ABI
 const NFT_ABI = [{
-    // view is the new keyword for "constant"
+    // View is the new keyword for "constant"
     "view": false,
     "inputs": [
       {
@@ -27,7 +38,7 @@ const NFT_ABI = [{
     "type": "function"},
     // Add to our ABI to include the returnTokenID function
     {
-    // change view to true, so the return values can be accessed
+    // Change view to true, so the return values can be accessed
     "view": true,
     "inputs": [],
     "name": "returnTokenID",
@@ -43,14 +54,18 @@ const NFT_ABI = [{
     "type": "function"}
   ]
 
+// The main minting function
 async function main() {
+
+    // Connect to our wallet and create a web3Instance
     const provider = new HDWalletProvider(MNEMONIC, `https://${NETWORK}.infura.io/v3/${INFURA_KEY}`)
     const web3Instance = new web3(
         provider
     )
+    // Connect to our contract
     const nftContract = new web3Instance.eth.Contract(NFT_ABI, NFT_CONTRACT_ADDRESS, { gasLimit: "1000000" })
 
-    // Artworks issued directly to the owner.
+    // Issue an artwork directly to the owner.
     const result = await nftContract.methods.mintTo(OWNER_ADDRESS).send({ from: OWNER_ADDRESS });
     console.log("Minted artwork. Transaction: " + result.transactionHash)
 
@@ -58,7 +73,7 @@ async function main() {
     const newTokenID = await nftContract.methods.returnTokenID().call();
     console.log("Token ID: " + newTokenID)
 
-    // exit the program
+    // Exit the program
     return process.exit(0);
 }
 
