@@ -11,10 +11,10 @@ venv
 *-lock.json
 
 # Don't track smart contract files
-smart_contract/build/
-smart_contract/flattened*
-smart_contract/node_modules/
-smart_contract/metadata_hosting
+Toro_smart_contract/build/
+Toro_smart_contract/flattened*
+Toro_smart_contract/node_modules/
+metadata_hosting
 
 # Don't track pkls or imgs
 *.pkl

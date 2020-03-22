@@ -1,12 +1,12 @@
 {
   "name": "Toro_smart_contract",
   "version": "1.0.0",
-  "description": "Rinkeby test network version of AA smart contract ",
+  "description": "Rinkeby test network Demo version of Toro smart contract ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository":{
+  "repository": {
     "type": "git",
     "url": "https://github.com/isaacschaal/Toro_Demo"
   },
