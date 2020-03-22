@@ -1,4 +1,4 @@
-const Toro_Demo_Test = artifacts.require("./Toro_Demo_Test.sol");
+const Toro_Demo = artifacts.require("./Toro_Demo.sol");
 
 module.exports = function(deployer, network) {
   // OpenSea proxy registry addresses for rinkeby and mainnet.
@@ -9,5 +9,5 @@ module.exports = function(deployer, network) {
     proxyRegistryAddress = "0xa5409ec958c83c3f309868babaca7c86dcb077c1";
   }
 
-  deployer.deploy(Toro_Demo_Test, proxyRegistryAddress, {gas: 5000000});
+  deployer.deploy(Toro_Demo, proxyRegistryAddress, {gas: 5000000});
 };

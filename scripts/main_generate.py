@@ -70,7 +70,7 @@ if __name__ == '__main__':
     # once each day
 
     # Base date
-    d0 = date(2020, 3, 21)
+    d0 = date(2020, 3, 20)
 
     # Current date
     d1 = d.split("-")
