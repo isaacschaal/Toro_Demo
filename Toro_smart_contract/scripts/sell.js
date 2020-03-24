@@ -6,6 +6,8 @@
 // number of favorites the artwork recieved, to
 // set the minimum price
 
+///////////////////
+
 // Connect to the OpenSea-SDK, import our other modules
 const opensea = require('opensea-js')
 const OpenSeaPort = opensea.OpenSeaPort;

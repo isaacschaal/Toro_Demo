@@ -4,6 +4,8 @@
 # It recieves the week as input, and uses that to select the
 # appropriate img_folder_path (along with saving the week to the DB)
 
+########################
+
 # Imports
 import argparse
 import os

@@ -2,6 +2,8 @@
 ## It is a Torch implementation of the TF StyleGAN Network
 ## I have seperated it into an importable folder (torchlib) for code clarity
 
+########################
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

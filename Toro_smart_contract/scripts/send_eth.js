@@ -12,6 +12,8 @@
 
 // Partially adapted from this tutorial https://davekiss.com/ethereum-web3-node-tutorial/
 
+///////////////////
+
 // Load our modules
 const HDWalletProvider = require("truffle-hdwallet-provider")
 const web3 = require('web3')

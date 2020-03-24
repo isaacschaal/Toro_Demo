@@ -11,6 +11,8 @@
 ## Comments with one "#" are from the original version, while commments
 ## with two "##" are provided by me
 
+########################
+
 ## Add the Toro_Demo folder to the sys path
 ## so that the script can import dnnlib and torchlib
 import sys

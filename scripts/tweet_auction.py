@@ -5,6 +5,8 @@
 # It recieves the week as input, and uses that to correctly
 # query the DB
 
+########################
+
 # Imports
 from twython import Twython
 import os

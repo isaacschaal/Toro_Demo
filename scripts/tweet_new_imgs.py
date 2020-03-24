@@ -5,6 +5,8 @@
 # It recieves the week as input, and uses that to correctly
 # query the DB and access the correct images
 
+########################
+
 # Imports
 import os
 import time

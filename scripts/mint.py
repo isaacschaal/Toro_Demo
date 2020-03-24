@@ -6,7 +6,9 @@
 # It recieves the week as input, and uses that to correctly
 # query the DB
 
-# Imports 
+########################
+
+# Imports
 import time
 import argparse
 from PIL import Image

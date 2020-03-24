@@ -1,6 +1,8 @@
 # Create the SQlite DB
 # Run this once to initialize the DB
 
+########################
+
 # Imports
 import sqlalchemy as db
 from sqlalchemy.ext.declarative import declarative_base

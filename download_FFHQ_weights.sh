@@ -6,6 +6,8 @@
 
 # This code was adapted from https://stackoverflow.com/questions/25010369/wget-curl-large-file-from-google-drive
 
+########################
+
 # The name and ID of the FFHQ weights
 fileid="1MEGjdvVpUsu1jB4zrXZN7Y4kBBOzizDQ"
 filename="karras2019stylegan-ffhq-1024x1024.pkl"

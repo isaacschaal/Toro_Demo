@@ -6,6 +6,8 @@
 // arguments. The token metadata is linked to the id
 // and is uploaded in a seperate function in the main_mint.py script
 
+///////////////////
+
 // Access our environement variables
 const HDWalletProvider = require("truffle-hdwallet-provider")
 const web3 = require('web3')
